@@ -55,12 +55,12 @@ public class Drive{
                         
                         case 4:
                             System.out.print("Ingrese el nombre del nuevo producto: ");
-                            String nombreProducto = scanner.nextLine();
+                            String nombreProducto = sc.nextLine();
                     
                             System.out.print("Ingrese la cantidad del nuevo producto: ");
                             int cantidadProducto;
                             try {
-                                cantidadProducto = Integer.parseInt(scanner.nextLine());
+                                cantidadProducto = Integer.parseInt(sc.nextLine());
                             } catch (NumberFormatException e) {
                                 System.out.println("Entrada no válida para la cantidad. Asegúrese de ingresar un número entero.");
                                 return; // Salir del programa si la entrada no es válida
@@ -69,17 +69,17 @@ public class Drive{
                             System.out.print("Ingrese el precio del nuevo producto: ");
                             double precioProducto;
                             try {
-                                precioProducto = Double.parseDouble(scanner.nextLine());
+                                precioProducto = Double.parseDouble(sc.nextLine());
                             } catch (NumberFormatException e) {
                                 System.out.println("Entrada no válida para el precio. Asegúrese de ingresar un número decimal.");
                                 return; // Salir del programa si la entrada no es válida
                             }
                     
                             // Crear un nuevo objeto Producto con los datos ingresados por el usuario
-                            Producto nuevoProducto = new Producto(nombreProducto, cantidadProducto, precioProducto);
+                            Producto nuevoProducto = new Producto(nombreProducto, cantidadProducto, (int) precioProducto);
                     
                             // Llamar al método para agregar el nuevo producto al inventario
-                            agregarProducto(inventario, nuevoProducto);
+                            Producto.agregarProducto(inventario, nuevoProducto);
                     
                             // Verificar que el producto haya sido agregado
                             System.out.println("Nuevo producto agregado al inventario:");
