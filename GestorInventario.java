@@ -1,4 +1,5 @@
 import java.io.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,11 +11,13 @@ public class GestorInventario {
             String linea;
             while ((linea = reader.readLine()) != null) {
                 String[] partes = linea.split(",");
-                if (partes.length == 3) {
-                    Producto producto = new Producto(linea, 0, 0);
-                    producto.setNombre(partes[0]);
-                    producto.setCantidad(Integer.parseInt(partes[1]));
-                    producto.setPrecio(Double.parseDouble(partes[2]));
+                if (partes.length == 5) {
+                    int id = (Integer.parseInt(partes[0]));
+                    String nombre = (partes[1]);
+                    double precio = (Double.parseDouble(partes[2]));
+                    int cantidad = (Integer.parseInt(partes[3]));
+                    int cantidadv = (Integer.parseInt(partes[4]));
+                    Producto producto = new Producto(id, nombre, precio, cantidad, cantidadv);
                     inventario.add(producto);
                 }
             }
@@ -25,6 +28,29 @@ public class GestorInventario {
         return inventario;
     }
 
+    public List<Venta> leerCSV2(String nombreArchivo) {
+        List<Venta> ventas = new ArrayList<>();
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(nombreArchivo))) {
+            String linea;
+            while ((linea = reader.readLine()) != null) {
+                String[] partes = linea.split(",");
+                if (partes.length == 3) {
+                    String nombre = (partes[0]);
+                    int cantv = (Integer.parseInt(partes[1]));
+                    double total = (Double.parseDouble(partes[2]));
+                    LocalDate fecha = LocalDate.parse(partes[3]);
+                    Venta venta = new Venta(nombre, cantv, total, fecha);
+                    ventas.add(venta);
+                }
+            }
+        } catch (IOException | NumberFormatException e) {
+            e.printStackTrace();
+        }
+
+        return ventas;
+    }
+
     public static void imprimirInventario(List<Producto> inventario) {
         System.out.println("Inventario actual:");
         for (Producto producto : inventario) {
@@ -32,61 +58,41 @@ public class GestorInventario {
         }
     }
 
+    public static void imprimirVentas(List<Venta> ventas) {
+        System.out.println("Ventas realizadas:");
+        for (Venta venta : ventas) {
+            System.out.println(venta);
+        }
+    }
+
+
     public void agregarProducto(List<Producto> inventario, Producto nuevoProducto) {
         inventario.add(nuevoProducto);
     }
 
-    public void modificarProducto(List<Producto> inventario, String nombre, int nuevaCantidad, double nuevoPrecio) {
-        for (Producto producto : inventario) {
-            if (producto.getNombre().equals(nombre)) {
-                producto.setCantidad(nuevaCantidad);
-                producto.setPrecio(nuevoPrecio);
-                break;
-            }
-        }
-    }
-    
-    public static void venderProducto(List<Producto> inventario, List<Venta> ventas, String nombreProducto, int cantidadVendida) {
-        for (Producto producto : inventario) {
-            if (producto.getNombre().equalsIgnoreCase(nombreProducto)) {
-                int cantidadDisponible = producto.getCantidad();
-                if (cantidadDisponible >= cantidadVendida) {
-                    producto.setCantidad(cantidadDisponible - cantidadVendida);
-                    ventas.add(new Venta(nombreProducto, cantidadVendida));
-                    System.out.println("Venta registrada: " + cantidadVendida + " unidades de " + nombreProducto);
-                } else {
-                    System.out.println("No hay suficientes unidades disponibles para la venta.");
-                }
-                return; // Terminamos la búsqueda después de encontrar el producto.
-            }
-        }
-        System.out.println("Producto no encontrado en el inventario.");
-    }
-
-    public static double calcularTotalVentas(List<Producto> inventario) {
-        double totalVentas = 0.0;
-        for (Producto producto : inventario) {
-            double precioProducto = producto.getPrecio();
-            int cantidadVendida = producto.getCantidad();
-            double ventasProducto = precioProducto * cantidadVendida;
-            totalVentas += ventasProducto;
-        }
-        return totalVentas;
-    }
 
     public void guardarCSV(List<Producto> inventario, String nombreArchivo) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(nombreArchivo))) {
             for (Producto producto : inventario) {
-                String linea = producto.getNombre() + "," + producto.getCantidad() + "," + producto.getPrecio();
+                String linea = producto.getId() + "," + producto.getNombre() + "," + producto.getPrecio() + "," + producto.getCantidad() + "," + producto.getCantidadv();
                 writer.write(linea);
-                writer.newLine(); // Add a new line separator
+                writer.newLine(); 
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public void modificarProducto(Producto productoExistente, int nuevaCantidad, double nuevoPrecio) {
+    public void guardarCSV2(List<Venta> ventas, String nombreArchivo) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(nombreArchivo))) {
+            for (Venta venta : ventas) {
+                String linea = venta.getNombreProducto() + "," + venta.getCantidadVendida() + "," + venta.getTotal() + "," + venta.getFecha();
+                writer.write(linea);
+                writer.newLine(); 
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
 
