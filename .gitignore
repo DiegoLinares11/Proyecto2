@@ -1,0 +1,12 @@
+# Ignorar archivos binarios
+*.class
+*.jar
+*.war
+*.ear
+
+# Ignorar archivos temporales
+*~
+.DS_Store
+
+# Ignorar archivos generados por el IDE
+target/
