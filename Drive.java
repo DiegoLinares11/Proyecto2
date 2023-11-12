@@ -1,13 +1,13 @@
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Scanner;
-public class Drive{
+
+public class Drive {
     public static void main(String[] args) {
-        
+
         GestorInventario g = new GestorInventario();
         List<Venta> ventas = new GestorInventario().leerCSV2("ventas.csv");
         List<Producto> inventario = g.leerCSV("inventario.csv");
-        
 
         while (true) {
             System.out.println("1. Mostrar productos disponibles");
@@ -25,11 +25,12 @@ public class Drive{
                 case 1:
                     g.imprimirInventario(inventario);
                     break;
-                
+
                 case 2:
                     g.imprimirInventario(inventario);
                     while (true) {
-                        System.out.println("Ingresa el ID del producto que deseas vender (Ingresa 0 para salir del modo venta): ");
+                        System.out.println(
+                                "Ingresa el ID del producto que deseas vender (Ingresa 0 para salir del modo venta): ");
                         int index = sc.nextInt();
 
                         if (index == 0) {
@@ -37,22 +38,22 @@ public class Drive{
                         }
 
                         inventario.stream()
-                        .filter(p -> p.getId() == index)
-                        .findAny();
+                                .filter(p -> p.getId() == index)
+                                .findAny();
 
                         Producto producto = inventario.stream()
-                        .filter(p -> p.getId() == index)
-                        .findAny()
-                        .orElse(null);
-                        
+                                .filter(p -> p.getId() == index)
+                                .findAny()
+                                .orElse(null);
+
                         if (producto != null) {
                             System.out.println("Ingresa la cantidad a vender: ");
                             String name = producto.getNombre();
                             int vend = sc.nextInt();
                             int cand = producto.getCantidad();
                             double tot = vend * producto.getPrecio();
-                            
-                            if(vend <= cand){
+
+                            if (vend <= cand) {
                                 producto.setCantidad(cand - vend);
                                 producto.setCantidadv(vend);
 
@@ -65,7 +66,7 @@ public class Drive{
                         } else {
                             System.out.println("Lo sentimos el ID que proporcionaste no existe");
                         }
-                            
+
                     }
                     g.guardarCSV2(ventas, "ventas.csv");
                     g.guardarCSV(inventario, "inventario.csv");
@@ -77,25 +78,22 @@ public class Drive{
                         System.out.println("2. Reporte semanal.");
                         System.out.println("3. Reporte mensual.");
                         System.out.println("4. Mes especifico.");
-                        
+
                         Scanner scn = new Scanner(System.in);
                         System.out.println("Ingresa la opcion que deseas: ");
                         int opt = sc.nextInt();
                         sc.nextLine();
                         switch (opt) {
                             case 1:
-                                
+
                                 break;
-                        
+
                             default:
                                 break;
                         }
 
-
                     }
 
-                    break;
-           
                 case 4:
                     System.out.println("Ingrese el id del nuevo producto: ");
                     int idProducto;
@@ -114,7 +112,8 @@ public class Drive{
                     try {
                         cantidadProducto = Integer.parseInt(sc.nextLine());
                     } catch (NumberFormatException e) {
-                        System.out.println("Entrada no válida para la cantidad. Asegúrese de ingresar un número entero.");
+                        System.out
+                                .println("Entrada no válida para la cantidad. Asegúrese de ingresar un número entero.");
                         return; // Salir del programa si la entrada no es válida
                     }
 
@@ -123,7 +122,8 @@ public class Drive{
                     try {
                         precioProducto = Double.parseDouble(sc.nextLine());
                     } catch (NumberFormatException e) {
-                        System.out.println("Entrada no válida para el precio. Asegúrese de ingresar un número decimal.");
+                        System.out
+                                .println("Entrada no válida para el precio. Asegúrese de ingresar un número decimal.");
                         return; // Salir del programa si la entrada no es válida
                     }
 
@@ -131,7 +131,7 @@ public class Drive{
                     inventario.add(producto);
                     g.guardarCSV(inventario, "inventario.csv");
                     break;
-                
+
                 case 5:
                     System.out.println("Gracias por elegirnos, hasta luego");
                     g.guardarCSV(inventario, "inventario.csv");
