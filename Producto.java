@@ -1,7 +1,7 @@
 import java.util.List;
 
 public class Producto {
-    private int id; 
+    private int id;
     private String nombre;
     private Double precio;
     private int cantidad;
@@ -15,7 +15,6 @@ public class Producto {
         this.cantidadv = cantidadv;
     }
 
-
     public int getId() {
         return id;
     }
@@ -24,23 +23,23 @@ public class Producto {
         this.id = id;
     }
 
-     public int getCantidadv() {
+    public int getCantidadv() {
         return cantidadv;
     }
 
     public void setCantidadv(int cantidadv) {
         this.cantidadv = cantidadv;
     }
-    
-    public String getNombre(){
+
+    public String getNombre() {
         return nombre;
     }
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-    
-    public double getPrecio(){
+
+    public double getPrecio() {
         return precio;
     }
 
@@ -52,16 +51,17 @@ public class Producto {
         this.cantidad = cantidad;
     }
 
-    public int getCantidad(){
+    public int getCantidad() {
         return cantidad;
     }
-    
+
     public static void agregarProducto(List<Producto> inventario, Producto nuevoProducto) {
         inventario.add(nuevoProducto);
     }
-    
+
     @Override
     public String toString() {
-        return "Producto [ID=" + id + ", nombre=" + nombre + ", cantidad=" + cantidad + ", cantidad vendida=" + cantidadv + ", precio=" + precio + "]";
+        return "Producto [ID=" + id + ", nombre=" + nombre + ", cantidad=" + cantidad + ", cantidad vendida="
+                + cantidadv + ", precio=" + precio + "]";
     }
 }
