@@ -39,6 +39,7 @@ public class Venta {
 
     @Override
     public String toString() {
-        return "Venta [Producto: " + nombreProducto + ", Cantidad vendida: " + cantidadVendida + ", Fecha de la venta: " + fecha +"]";
+        return "Venta [Producto: " + nombreProducto + ", Cantidad vendida: " + cantidadVendida + ", Fecha de la venta: "
+                + fecha + "]";
     }
 }
