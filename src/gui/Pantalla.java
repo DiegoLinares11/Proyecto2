@@ -52,7 +52,7 @@ public class Pantalla extends JFrame {
 		List<Venta> ventas = g.leerVentas("ventas.csv");
 		Scanner sc = new Scanner(System.in);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 450, 323);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -60,7 +60,7 @@ public class Pantalla extends JFrame {
 		contentPane.setLayout(null);
 
 		JLabel lblNewLabel = new JLabel("BIENVENIDOS AL PROGRAMA QUE TE AYUDARA CON TU INVENTARIO.");
-		lblNewLabel.setBounds(34, 11, 366, 22);
+		lblNewLabel.setBounds(10, 11, 501, 22);
 		contentPane.add(lblNewLabel);
 
 		JButton btnNewButton = new JButton("Mostrar productos disponibles");
