@@ -1,3 +1,5 @@
+package logica;
+
 import java.io.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -30,21 +32,22 @@ public class GestorInventario {
 
     public List<Venta> leerVentas(String rutaArchivo) throws IOException {
         List<Venta> ventas = new ArrayList<>();
-    
+
         try (BufferedReader br = new BufferedReader(new FileReader(rutaArchivo))) {
             String linea;
             while ((linea = br.readLine()) != null) {
                 // Separamos la línea por comas
                 String[] datos = linea.split(",");
-    
+
                 // Creamos una nueva venta
-                Venta venta = new Venta(datos[0], Integer.parseInt(datos[1]), Double.parseDouble(datos[2]), LocalDate.parse(datos[3]));
-    
+                Venta venta = new Venta(datos[0], Integer.parseInt(datos[1]), Double.parseDouble(datos[2]),
+                        LocalDate.parse(datos[3]));
+
                 // Agregamos la venta al List
                 ventas.add(venta);
             }
         }
-    
+
         return ventas;
     }
 
@@ -62,18 +65,17 @@ public class GestorInventario {
         }
     }
 
-
     public void agregarProducto(List<Producto> inventario, Producto nuevoProducto) {
         inventario.add(nuevoProducto);
     }
 
-
     public void guardarCSV(List<Producto> inventario, String nombreArchivo) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(nombreArchivo))) {
             for (Producto producto : inventario) {
-                String linea = producto.getId() + "," + producto.getNombre() + "," + producto.getPrecio() + "," + producto.getCantidad() + "," + producto.getCantidadv();
+                String linea = producto.getId() + "," + producto.getNombre() + "," + producto.getPrecio() + ","
+                        + producto.getCantidad() + "," + producto.getCantidadv();
                 writer.write(linea);
-                writer.newLine(); 
+                writer.newLine();
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -83,13 +85,13 @@ public class GestorInventario {
     public void guardarCSV2(List<Venta> ventas, String nombreArchivo) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(nombreArchivo))) {
             for (Venta venta : ventas) {
-                String linea = venta.getNombreProducto() + "," + venta.getCantidadVendida() + "," + venta.getTotal() + "," + venta.getFecha();
+                String linea = venta.getNombreProducto() + "," + venta.getCantidadVendida() + "," + venta.getTotal()
+                        + "," + venta.getFecha();
                 writer.write(linea);
-                writer.newLine(); 
+                writer.newLine();
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 }
-

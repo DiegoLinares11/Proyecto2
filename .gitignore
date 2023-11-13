@@ -10,3 +10,4 @@
 
 # Ignorar archivos generados por el IDE
 target/
+/bin/

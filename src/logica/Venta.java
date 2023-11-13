@@ -1,3 +1,5 @@
+package logica;
+
 import java.time.LocalDate;
 
 public class Venta {
