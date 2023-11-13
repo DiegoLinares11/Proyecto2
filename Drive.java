@@ -1,12 +1,13 @@
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Scanner;
+
 public class Drive{
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         
         GestorInventario g = new GestorInventario();
-        List<Venta> ventas = new GestorInventario().leerCSV2("ventas.csv");
         List<Producto> inventario = g.leerCSV("inventario.csv");
+        List<Venta> ventas = g.leerVentas("ventas.csv");
         
 
         while (true) {
@@ -72,30 +73,69 @@ public class Drive{
                     break;
 
                 case 3:
+                    Gestorventas gv = new Gestorventas();
                     while (true) {
-                        System.out.println("1. Reporte general.");
-                        System.out.println("2. Reporte semanal.");
-                        System.out.println("3. Reporte mensual.");
-                        System.out.println("4. Mes especifico.");
+                        System.out.println("a. Reporte general.");
+                        System.out.println("b. Reporte semanal.");
+                        System.out.println("c. Reporte mensual.");
+                        System.out.println("d. Mes especifico.");
+                        System.out.println("s. Salir del reporte de ventas.");
                         
                         Scanner scn = new Scanner(System.in);
-                        System.out.println("Ingresa la opcion que deseas: ");
-                        int opt = sc.nextInt();
-                        sc.nextLine();
-                        switch (opt) {
-                            case 1:
-                                
+                        System.out.println("Ingresa la opcion que deseas: ");   
+                        String o = scn.nextLine();  // Usar scn en lugar de sc
+                        switch (o) {
+                            case "a":
+                                System.out.println("----------------------Reporte General------------------");
+                                System.out.println("VENTAS DEL DIA:");
+                                gv.Diario(ventas);
+                                System.out.println("-------");
+                                System.out.println("VENTAS DE LA SEMANA:");
+                                gv.Semanal(ventas);
+                                System.out.println("-------");
+                                System.out.println("VENTAS DEL MES:");
+                                gv.Mensual(ventas);
+                                System.out.println("-------");
+                                gv.Anual(ventas);
+                                System.out.println("--------------------------------------------------------");
                                 break;
-                        
+                            
+                            case "b":
+                                gv.Semanal(ventas);
+                                break;
+                
+                            case "c": 
+                                gv.Mensual(ventas);
+                                break;
+                            
+                            case "d":
+                                System.out.println("Por favor digita el numero de mes que quieres saber (Ejemplo: Enero -> 1, Febrero -> 2...)");
+                                int mes;
+                                try {
+                                    mes = Integer.parseInt(sc.nextLine());
+                                } catch (NumberFormatException e) {
+                                    System.out.println("Entrada no válida para el Mes. Asegúrese de ingresar un número entero.");
+                                    break; 
+                                }
+
+                                gv.MensuaF(ventas, mes);
+                                break;
+                
+                            case "s":
+                                System.out.println("Saliendo del reporte de ventas.");
+                                break; 
+                
                             default:
+                                System.out.println("Opción inválida. Por favor, elija una opción válida.");
                                 break;
                         }
-
-
+                        if (o.equals("s")){
+                            break;
+                        }
                     }
-
                     break;
-           
+                 
+
                 case 4:
                     System.out.println("Ingrese el id del nuevo producto: ");
                     int idProducto;
@@ -103,7 +143,7 @@ public class Drive{
                         idProducto = Integer.parseInt(sc.nextLine());
                     } catch (NumberFormatException e) {
                         System.out.println("Entrada no válida para el ID. Asegúrese de ingresar un número entero.");
-                        return; // Salir del programa si la entrada no es válida
+                        break; // Salir del programa si la entrada no es válida
                     }
 
                     System.out.println("Ingrese el nombre del nuevo producto: ");
@@ -115,7 +155,7 @@ public class Drive{
                         cantidadProducto = Integer.parseInt(sc.nextLine());
                     } catch (NumberFormatException e) {
                         System.out.println("Entrada no válida para la cantidad. Asegúrese de ingresar un número entero.");
-                        return; // Salir del programa si la entrada no es válida
+                        break; // Salir del programa si la entrada no es válida
                     }
 
                     System.out.print("Ingrese el precio del nuevo producto: ");
@@ -124,7 +164,7 @@ public class Drive{
                         precioProducto = Double.parseDouble(sc.nextLine());
                     } catch (NumberFormatException e) {
                         System.out.println("Entrada no válida para el precio. Asegúrese de ingresar un número decimal.");
-                        return; // Salir del programa si la entrada no es válida
+                        break; // Salir del programa si la entrada no es válida
                     }
 
                     Producto producto = new Producto(idProducto, nombreProducto, precioProducto, cantidadProducto, 0);

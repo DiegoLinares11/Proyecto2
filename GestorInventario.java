@@ -28,37 +28,34 @@ public class GestorInventario {
         return inventario;
     }
 
-    public List<Venta> leerCSV2(String nombreArchivo) {
+    public List<Venta> leerVentas(String rutaArchivo) throws IOException {
         List<Venta> ventas = new ArrayList<>();
-
-        try (BufferedReader reader = new BufferedReader(new FileReader(nombreArchivo))) {
+    
+        try (BufferedReader br = new BufferedReader(new FileReader(rutaArchivo))) {
             String linea;
-            while ((linea = reader.readLine()) != null) {
-                String[] partes = linea.split(",");
-                if (partes.length == 3) {
-                    String nombre = (partes[0]);
-                    int cantv = (Integer.parseInt(partes[1]));
-                    double total = (Double.parseDouble(partes[2]));
-                    LocalDate fecha = LocalDate.parse(partes[3]);
-                    Venta venta = new Venta(nombre, cantv, total, fecha);
-                    ventas.add(venta);
-                }
+            while ((linea = br.readLine()) != null) {
+                // Separamos la línea por comas
+                String[] datos = linea.split(",");
+    
+                // Creamos una nueva venta
+                Venta venta = new Venta(datos[0], Integer.parseInt(datos[1]), Double.parseDouble(datos[2]), LocalDate.parse(datos[3]));
+    
+                // Agregamos la venta al List
+                ventas.add(venta);
             }
-        } catch (IOException | NumberFormatException e) {
-            e.printStackTrace();
         }
-
+    
         return ventas;
     }
 
-    public static void imprimirInventario(List<Producto> inventario) {
+    public void imprimirInventario(List<Producto> inventario) {
         System.out.println("Inventario actual:");
         for (Producto producto : inventario) {
             System.out.println(producto);
         }
     }
 
-    public static void imprimirVentas(List<Venta> ventas) {
+    public void imprimirVentas(List<Venta> ventas) {
         System.out.println("Ventas realizadas:");
         for (Venta venta : ventas) {
             System.out.println(venta);
