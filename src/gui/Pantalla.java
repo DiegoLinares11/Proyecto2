@@ -124,13 +124,13 @@ public class Pantalla extends JFrame {
 
 							Venta venta = new Venta(name, vend, tot, LocalDate.now());
 							ventas.add(venta);
-							consoleWriteLine("Venta realizada!");
+							writeSuccessMessage("Venta realizada!");
 						} else {
-							System.out.println("Cantidad no disponible, lo sentimos");
+							writeWarningMessage("Cantidad no disponible, lo sentimos");
 						}
 
 					} else {
-						System.out.println("Lo sentimos el ID que proporcionaste no existe");
+						writeWarningMessage("Lo sentimos el ID que proporcionaste no existe");
 					}
 
 				}

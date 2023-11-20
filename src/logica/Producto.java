@@ -9,6 +9,13 @@ public class Producto {
     private int cantidad;
     private int cantidadv;
 
+    /**
+     * @param id
+     * @param nombre
+     * @param precio
+     * @param cantidad
+     * @param cantidadv
+     */
     public Producto(int id, String nombre, Double precio, int cantidad, int cantidadv) {
         this.id = id;
         this.nombre = nombre;
@@ -17,10 +24,16 @@ public class Producto {
         this.cantidadv = cantidadv;
     }
 
+    /**
+     * @return
+     */
     public int getId() {
         return id;
     }
 
+    /**
+     * @param id
+     */
     public void setId(int id) {
         this.id = id;
     }
@@ -29,6 +42,9 @@ public class Producto {
         return cantidadv;
     }
 
+    /**
+     * @param cantidadv
+     */
     public void setCantidadv(int cantidadv) {
         this.cantidadv = cantidadv;
     }
@@ -37,6 +53,9 @@ public class Producto {
         return nombre;
     }
 
+    /**
+     * @param nombre
+     */
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
@@ -45,6 +64,9 @@ public class Producto {
         return precio;
     }
 
+    /**
+     * @param precio
+     */
     public void setPrecio(double precio) {
         this.precio = precio;
     }
@@ -53,10 +75,17 @@ public class Producto {
         this.cantidad = cantidad;
     }
 
+    /**
+     * @return
+     */
     public int getCantidad() {
         return cantidad;
     }
 
+    /**
+     * @param inventario
+     * @param nuevoProducto
+     */
     public static void agregarProducto(List<Producto> inventario, Producto nuevoProducto) {
         inventario.add(nuevoProducto);
     }

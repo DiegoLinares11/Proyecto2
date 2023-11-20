@@ -8,6 +8,12 @@ public class Venta {
     private double total;
     private LocalDate fecha;
 
+    /**
+     * @param nombreProducto
+     * @param cantidadVendida
+     * @param total
+     * @param fecha
+     */
     public Venta(String nombreProducto, int cantidadVendida, double total, LocalDate fecha) {
         this.nombreProducto = nombreProducto;
         this.cantidadVendida = cantidadVendida;
@@ -19,6 +25,9 @@ public class Venta {
         return total;
     }
 
+    /**
+     * @param total
+     */
     public void setTotal(double total) {
         this.total = total;
     }
@@ -27,6 +36,9 @@ public class Venta {
         return fecha;
     }
 
+    /**
+     * @param fecha
+     */
     public void setFecha(LocalDate fecha) {
         this.fecha = fecha;
     }

@@ -6,6 +6,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GestorInventario {
+    /**
+     * @param nombreArchivo
+     * @return
+     */
     public List<Producto> leerCSV(String nombreArchivo) {
         List<Producto> inventario = new ArrayList<>();
 
@@ -30,6 +34,11 @@ public class GestorInventario {
         return inventario;
     }
 
+    /**
+     * @param rutaArchivo
+     * @return
+     * @throws IOException
+     */
     public List<Venta> leerVentas(String rutaArchivo) throws IOException {
         List<Venta> ventas = new ArrayList<>();
 
@@ -51,6 +60,9 @@ public class GestorInventario {
         return ventas;
     }
 
+    /**
+     * @param inventario
+     */
     public void imprimirInventario(List<Producto> inventario) {
         System.out.println("Inventario actual:");
         for (Producto producto : inventario) {
@@ -58,6 +70,9 @@ public class GestorInventario {
         }
     }
 
+    /**
+     * @param ventas
+     */
     public void imprimirVentas(List<Venta> ventas) {
         System.out.println("Ventas realizadas:");
         for (Venta venta : ventas) {
@@ -65,10 +80,18 @@ public class GestorInventario {
         }
     }
 
+    /**
+     * @param inventario
+     * @param nuevoProducto
+     */
     public void agregarProducto(List<Producto> inventario, Producto nuevoProducto) {
         inventario.add(nuevoProducto);
     }
 
+    /**
+     * @param inventario
+     * @param nombreArchivo
+     */
     public void guardarCSV(List<Producto> inventario, String nombreArchivo) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(nombreArchivo))) {
             for (Producto producto : inventario) {
@@ -82,6 +105,10 @@ public class GestorInventario {
         }
     }
 
+    /**
+     * @param ventas
+     * @param nombreArchivo
+     */
     public void guardarCSV2(List<Venta> ventas, String nombreArchivo) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(nombreArchivo))) {
             for (Venta venta : ventas) {

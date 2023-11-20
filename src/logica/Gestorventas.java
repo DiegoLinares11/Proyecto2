@@ -7,6 +7,9 @@ import java.time.temporal.TemporalAdjusters;
 import java.util.List;
 
 public class Gestorventas {
+    /**
+     * @param ventas
+     */
     public void Diario(List<Venta> ventas) {
         Double total = 0.0;
 
@@ -21,6 +24,9 @@ public class Gestorventas {
         System.out.println("El total de ventas realizadas en el dia es: " + total);
     }
 
+    /**
+     * @param ventas
+     */
     public void Semanal(List<Venta> ventas) {
         Double total = 0.0;
         LocalDate today = LocalDate.now();
@@ -40,6 +46,9 @@ public class Gestorventas {
         System.out.println("Total de ingresos de la semana: " + total);
     }
 
+    /**
+     * @param ventas
+     */
     public void Mensual(List<Venta> ventas) {
         Double total = 0.0;
 
@@ -60,6 +69,10 @@ public class Gestorventas {
         System.out.println("Total de ingresos del mes: " + total);
     }
 
+    /**
+     * @param ventas
+     * @param mes
+     */
     public void MensuaF(List<Venta> ventas, int mes) {
         Double total = 0.0;
 
@@ -78,6 +91,9 @@ public class Gestorventas {
         System.out.println("Total de ingresos del mes: " + total);
     }
 
+    /**
+     * @param ventas
+     */
     public void Anual(List<Venta> ventas) {
         LocalDate today = LocalDate.now();
 
